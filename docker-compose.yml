@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+  venice:
+    build:
+        context: .
+        target: vu
+        dockerfile: ./Dockerfile
+    restart: unless-stopped
+    volumes:
+        - ~/bf3:/bf3 # BF3 mount
+        - ./instance:/vu/instance # BF3 mount
+    ports:
+      - 7948:7948 # Monitored Harmony, the VU networking layer
+      - 25200:25200 # Frostbite networking layer
+      - 47200:47200 # Remote administration protocol (RCON)
